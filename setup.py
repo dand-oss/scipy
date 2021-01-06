@@ -559,6 +559,7 @@ def setup_package():
             'numpy>=1.16.5',
         ],
         python_requires='>=3.7',
+        version=get_version_info()[0],
     )
 
     if "--force" in sys.argv:
@@ -589,14 +590,6 @@ def setup_package():
             generate_cython()
 
         metadata['configuration'] = configuration
-    else:
-        # Don't import numpy here - non-build actions are required to succeed
-        # without NumPy for example when pip is used to install Scipy when
-        # NumPy is not yet present in the system.
-
-        # Version number is added to metadata inside configuration() if build
-        # is run.
-        metadata['version'] = get_version_info()[0]
 
     setup(**metadata)
 
